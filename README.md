@@ -19,10 +19,10 @@ const secreKey = ""
 
 const client = new Client.RestClient(appId, certId, apiUrl, secreKey)
 
-client.calls.create({
-  to1: '17606661993',
-  to2: '13611460986',
-  body: {
+client.calls.create(
+  '17606661993',
+  '13611460986',
+  {
     user_data: '',
     max_dial_duration: 30
   }

@@ -3,24 +3,28 @@ const CALL_URL = 'call/duo_callback'
 const CALL_CANCEL_URL = 'call/duo_callback_cancel'
 
 export default class CallClient extends Client {
+
   constructor(appId, certId, apiUrl, secreKey) {
     super(appId, certId, apiUrl, secreKey)
   }
-  
+
   /**
-   * @param {object} options
-   *        - @param {string} from
-   *        - @param {string} to
-   *        - @param {string} body
-   * @return {promise}
+   * 呼叫方法
+   *
+   * @param {any} to1
+   * @param {any} to2
+   * @param {any} options
+   * @return {pormise}
+   *
+   * @memberOf CallClient
    */
-  create(options) {
-    if (!options.to2 || !options.to1 || !options.body) {
-      throw new Error('呼出缺少参数 (from|to|body)')
+  create(to1, to2, options) {
+    if (!to2 || !to1) {
+      throw new Error('呼出缺少参数 (to1|to2)')
     }
     options.body = Object.assign({}, {
-        to1: options.to1,
-        to2: options.to2,
+        to1: to1,
+        to2: to2,
         max_dial_duration: 30,
         from1: null,
         from2: null,
@@ -31,7 +35,7 @@ export default class CallClient extends Client {
         record_mode: 0,
         user_data: '',
       },
-      options.body
+      options
     )
     return this.request(options, CALL_URL)
   }
