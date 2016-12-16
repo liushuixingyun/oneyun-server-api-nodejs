@@ -26,7 +26,7 @@ client.calls.create(
     user_data: '',
     max_dial_duration: 30
   }
-}).then( (data) => {
+).then( (data) => {
 	console.log(data);
 }).catch((err)=>{
 	console.log(err);
